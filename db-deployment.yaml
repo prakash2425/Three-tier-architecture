@@ -1,0 +1,76 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@prakash2425 
+SIVAKUMARDEPURU
+/
+ThreeTireArchitecture-using-docker-and-kubernets
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+ThreeTireArchitecture-using-docker-and-kubernets/k8s-specifications/db-deployment.yaml
+@SIVAKUMARDEPURU
+SIVAKUMARDEPURU Add files via upload
+Latest commit 5c4fcdc 3 hours ago
+ History
+ 1 contributor
+34 lines (34 sloc)  646 Bytes
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: postgres:9.4
+        name: postgres
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+      volumes:
+      - name: db-data
+        emptyDir: {} 
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
